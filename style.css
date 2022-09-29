@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.container {
+    display: block;
+
+}
+
+.square {
+    border: 0.25rem solid lightgrey;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-family:sans-serif;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.used {
+    background-color: gray;
+    color: white;
+}
+
+.correct {
+    background-color: green;
+}
+
+.misplaced {
+    background-color: orange;
+}
+
+.incorrect {
+    animation: 3s ease-out incorrect-flash;
+}
+
+@keyframes incorrect-flash {
+    from {
+        border-color: red;
+    }
+    to {
+        border-color: lightgrey;
+    }
+}
