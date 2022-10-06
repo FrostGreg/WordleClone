@@ -43,16 +43,3 @@ body {
 .misplaced {
     background-color: orange;
 }
-
-.incorrect {
-    animation: 3s ease-out incorrect-flash;
-}
-
-@keyframes incorrect-flash {
-    from {
-        border-color: red;
-    }
-    to {
-        border-color: lightgrey;
-    }
-}

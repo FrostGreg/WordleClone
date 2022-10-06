@@ -12,6 +12,14 @@ function getWord(startNumber){
     return word;
 }
 
+function incorrectGuessAnimation(startNumber){
+    for (let i = 0; i < 5; i++){
+        const element = document.querySelector(`#letter-${parseInt(startNumber)+i}`);
+        element.animate([{borderColor: '#f00', easing: 'ease-out'}, {borderColor: '#d3d3d3'}],
+                         2000);
+    }
+}
+
 function isLetter(letter) {
     return /^[a-zA-Z]$/.test(letter);
 }
@@ -38,11 +46,9 @@ window.addEventListener('keydown', async (event) => {
         const wordCheckObject = await wordCheckPromise.json();
         
         if (!wordCheckObject.validWord){
-            console.log('invalid word');
+            incorrectGuessAnimation(currentNumber-4);
             return;
         }
-
-
 
         answer.then((resp) => {
             if (getWord(currentNumber-5) === resp.word){
@@ -50,18 +56,14 @@ window.addEventListener('keydown', async (event) => {
                 alert('congrats you win');
             }
         })
-        
-        
-        
             
         currentNumber++;
         
-        
         if (currentNumber >= 29) {
             active = false;
-            // answer.then((resp) => {
-            //     alert(`Wrong, it was ${resp.word}`);
-            // })
+            answer.then((resp) => {
+                alert(`Wrong, it was ${resp.word}`);
+            })
         }
     }
 });
