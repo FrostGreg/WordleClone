@@ -20,10 +20,22 @@ function incorrectGuessAnimation(startNumber){
     }
 }
 
+function checkLetter(letterElement, index){
+    answer.then((resp) => {
+        if (resp.word.at(index) === letterElement.textContent) {
+            letterElement.classList.add('correct');
+        }
+        else if (resp.word.includes(letterElement.textContent)){
+            letterElement.classList.add('misplaced');
+        }
+    });
+}
+
 function styleUsedRow(startNumber){
     for (let i = 0; i < 5; i++){
         const element = document.querySelector(`#letter-${parseInt(startNumber)+i}`);
         element.classList.add('used');
+        checkLetter(element, i);
     }
 }
 
@@ -60,7 +72,6 @@ window.addEventListener('keydown', async (event) => {
         answer.then((resp) => {
             if (getWord(currentNumber-5) === resp.word){
                 active = false;
-                alert('congrats you win');
             }
         })
             
