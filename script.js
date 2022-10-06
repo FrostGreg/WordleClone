@@ -20,6 +20,13 @@ function incorrectGuessAnimation(startNumber){
     }
 }
 
+function styleUsedRow(startNumber){
+    for (let i = 0; i < 5; i++){
+        const element = document.querySelector(`#letter-${parseInt(startNumber)+i}`);
+        element.classList.add('used');
+    }
+}
+
 function isLetter(letter) {
     return /^[a-zA-Z]$/.test(letter);
 }
@@ -57,6 +64,7 @@ window.addEventListener('keydown', async (event) => {
             }
         })
             
+        styleUsedRow(currentNumber-4);
         currentNumber++;
         
         if (currentNumber >= 29) {
