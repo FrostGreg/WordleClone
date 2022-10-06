@@ -15,6 +15,9 @@ function isLetter(letter) {
 }
 
 window.addEventListener('keydown', (event) => {
+    if (!active){
+        return;
+    }
     if (active && isLetter(event.key)){
         document.querySelector(`#letter-${parseInt(currentNumber)}`).textContent = event.key;
         
@@ -27,9 +30,13 @@ window.addEventListener('keydown', (event) => {
         }
             document.querySelector(`#letter-${parseInt(currentNumber)}`).textContent = '';
 
-    } else if (event.key === 'Enter' && (currentNumber+1) % 5 === 0){
-        currentNumber >= 29 ? currentNumber : currentNumber++;
-    }
-    console.log(currentNumber);
+    } else if (event.key === 'Enter' && (currentNumber+1) % 5 === 0 && document.querySelector(`#letter-${parseInt(currentNumber)}`).textContent !== ''){
+        if (currentNumber >= 29){
+            active = false;
+        } else {
+            currentNumber++;
+        }
 
+        console.log(getWord(currentNumber-5));
+    }
 });
