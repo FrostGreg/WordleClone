@@ -15,7 +15,18 @@ function getWord(startNumber){
 function incorrectGuessAnimation(startNumber){
     for (let i = 0; i < 5; i++){
         const element = document.querySelector(`#letter-${parseInt(startNumber)+i}`);
-        element.animate([{borderColor: '#f00', easing: 'ease-out'}, {borderColor: '#d3d3d3'}],
+        element.animate([{borderColor: '#f00', easing: 'ease-out', transform: 'rotate(0deg)'},
+                         {transform: 'rotate(3deg) scale(1.05)'},
+                         {transform: 'rotate(-3deg)'}, 
+                         {transform: 'rotate(3deg)'},
+                         {transform: 'rotate(-3deg)'}, 
+                         {transform: 'rotate(3deg)'},
+                         {transform: 'rotate(-3deg)'}, 
+                         {transform: 'rotate(3deg)'},
+                         {transform: 'rotate(-3deg)'}, 
+                         {transform: 'rotate(3deg)'},
+                         {transform: 'rotate(-3deg)'}, 
+                         {borderColor: '#d3d3d3', transform: 'rotate(0deg)'}],
                          2000);
     }
 }
@@ -34,8 +45,17 @@ function checkLetter(letterElement, index){
 function styleUsedRow(startNumber){
     for (let i = 0; i < 5; i++){
         const element = document.querySelector(`#letter-${parseInt(startNumber)+i}`);
-        element.classList.add('used');
-        checkLetter(element, i);
+        
+
+        const animation = element.animate([{transform: 'rotateY(0deg)'},
+                         {transform: 'rotateY(90deg)'}],
+                         1000);
+
+        animation.onfinish = function() {
+            element.classList.add('used');
+            checkLetter(element, i);
+            element.animate([{transform: 'rotateY(90deg)'}, {transform: 'rotateY(0deg)'}], 1000);
+        }
     }
 }
 
