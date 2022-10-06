@@ -49,12 +49,12 @@ function styleUsedRow(startNumber){
 
         const animation = element.animate([{transform: 'rotateY(0deg)'},
                          {transform: 'rotateY(90deg)'}],
-                         1000);
+                         500);
 
         animation.onfinish = function() {
             element.classList.add('used');
             checkLetter(element, i);
-            element.animate([{transform: 'rotateY(90deg)'}, {transform: 'rotateY(0deg)'}], 1000);
+            element.animate([{transform: 'rotateY(90deg)'}, {transform: 'rotateY(0deg)'}], 500);
         }
     }
 }
