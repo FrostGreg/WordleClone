@@ -68,7 +68,10 @@ window.addEventListener('keydown', async (event) => {
         return;
     }
     if (active && isLetter(event.key)){
-        document.querySelector(`#letter-${parseInt(currentNumber)}`).textContent = event.key;
+        const element = document.querySelector(`#letter-${parseInt(currentNumber)}`);
+
+        element.animate([{transform: 'scale(1.1)'}, {transform: 'scale(1)'}], 100);
+        element.textContent = event.key;
         
         (currentNumber + 1) % 5 === 0 ? currentNumber : currentNumber++;
 
