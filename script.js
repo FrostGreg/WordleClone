@@ -16,7 +16,7 @@ function isLetter(letter) {
     return /^[a-zA-Z]$/.test(letter);
 }
 
-window.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', async (event) => {
     if (!active){
         return;
     }
@@ -34,18 +34,34 @@ window.addEventListener('keydown', (event) => {
 
     } else if (event.key === 'Enter' && (currentNumber+1) % 5 === 0 && document.querySelector(`#letter-${parseInt(currentNumber)}`).textContent !== ''){
 
+        const wordCheckPromise = await fetch('https://words.dev-apis.com/validate-word', {method: 'POST', body: JSON.stringify({"word": getWord(currentNumber-4)})});
+        const wordCheckObject = await wordCheckPromise.json();
+        
+        if (!wordCheckObject.validWord){
+            console.log('invalid word');
+            return;
+        }
+
+
+
         answer.then((resp) => {
             if (getWord(currentNumber-5) === resp.word){
                 active = false;
                 alert('congrats you win');
             }
         })
-
-
-        if (currentNumber >= 29){
+        
+        
+        
+            
+        currentNumber++;
+        
+        
+        if (currentNumber >= 29) {
             active = false;
-        } else {
-            currentNumber++;
+            // answer.then((resp) => {
+            //     alert(`Wrong, it was ${resp.word}`);
+            // })
         }
     }
 });
