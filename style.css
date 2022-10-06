@@ -3,6 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-family: sans-serif;
 }
 
 
@@ -42,4 +43,33 @@ body {
 
 .misplaced {
     background-color: orange;
+}
+
+.blurred-component {
+    height: 100%;
+    width: 100%;
+    filter: blur(1px);
+    background: black;
+    opacity: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#finish-card {
+    position: absolute;
+    margin: auto;
+    width: 50%;
+    background: darkslategrey;
+    border-radius: 5rem;
+    color: white;
+    display: none;
+}
+
+#finish-title {
+    margin: 1rem;
+}
+
+#finish-body {
+    margin: 1rem;
 }

@@ -45,7 +45,6 @@ function checkLetter(letterElement, index){
 function styleUsedRow(startNumber){
     for (let i = 0; i < 5; i++){
         const element = document.querySelector(`#letter-${parseInt(startNumber)+i}`);
-        
 
         const animation = element.animate([{transform: 'rotateY(0deg)'},
                          {transform: 'rotateY(90deg)'}],
@@ -61,6 +60,22 @@ function styleUsedRow(startNumber){
 
 function isLetter(letter) {
     return /^[a-zA-Z]$/.test(letter);
+}
+
+function endGame(result){
+    active = false;
+    const blurOverlay = document.querySelector('.blurred-component');
+    blurOverlay.animate([{ opacity: '0%'}, { opacity: '50%'}], 3000);
+    blurOverlay.style.opacity = '50%';
+
+    document.querySelector('#finish-card').style.display = 'block';
+    
+    document.querySelector('#finish-title').textContent = result ? 'Congrats you won' : 'Oops not quite';
+    
+    answer.then((resp) => {
+            // alert(`Wrong, it was ${resp.word}`);
+        document.querySelector('#finish-body').textContent = `The word was, ${resp.word}`
+    })
 }
 
 window.addEventListener('keydown', async (event) => {
@@ -94,7 +109,7 @@ window.addEventListener('keydown', async (event) => {
 
         answer.then((resp) => {
             if (getWord(currentNumber-5) === resp.word){
-                active = false;
+                endGame(true);
             }
         })
             
@@ -102,10 +117,7 @@ window.addEventListener('keydown', async (event) => {
         currentNumber++;
         
         if (currentNumber >= 29) {
-            active = false;
-            answer.then((resp) => {
-                alert(`Wrong, it was ${resp.word}`);
-            })
+            endGame(false);
         }
     }
 });
