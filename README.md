@@ -2,4 +2,4 @@
 
 Followed from a tutorial in FrontEndMasters!
 
-But still pretty cool though :)
+But still pretty cool though :) :)
